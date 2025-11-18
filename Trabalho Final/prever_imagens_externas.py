@@ -7,7 +7,7 @@ import os
 
 PASTA_NOVAS_IMAGENS = "TestesExtras"
 
-CAMINHO_MODELO = "cats_dogs_model.keras"
+CAMINHO_MODELO = "cats_dogs_model_v2.keras"
 
 TAMANHO_IMAGEM = 224
 

@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pôster Científico A0 - Classificação de Cães e Gatos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Merriweather:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /*
+         * ESTILOS DE IMPRESSÃO A0
+         * Para imprimir corretamente:
+         * 1. Abra este arquivo HTML no Chrome ou Firefox.
+         * 2. Pressione Ctrl+P (ou Cmd+P) para Imprimir.
+         * 3. Defina o Destino como "Salvar como PDF".
+         * 4. Em "Mais definições":
+         *    - Tamanho do Papel: A0 (841 x 1189 mm)
+         *    - Orientação: Retrato
+         *    - Margens: Nenhuma
+         *    - Gráficos de segundo plano: Habilitar
+         * 5. Salve o PDF.
+        */
+        :root {
+            --furb-blue: #005088;
+            --furb-blue-dark: #003d66;
+            --furb-cream: #f3f0df;
+            --text-dark: #333333;
+            --text-light: #555555;
+            --bg-light-gray: #f8fafc;
+            --border-color: #e2e8f0;
+        }
+
+        body {
+            background-color: #d1d5db; /* Fundo cinza para "emoldurar" o pôster */
+            margin: 0;
+            padding: 0;
+            font-family: 'DM Sans', sans-serif;
+            -webkit-print-color-adjust: exact; /* Força impressão de cores */
+            color-adjust: exact;
+        }
+
+        .poster-container {
+            width: 84.1cm;
+            height: 118.9cm;
+            background: #ffffff;
+            margin: 20px auto;
+            padding: 2.5cm;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        /* --- CABEÇALHO --- */
+        .poster-header {
+            flex: 0 0 auto; /* Não cresce, não encolhe */
+            text-align: center;
+            border-bottom: 10px solid var(--furb-blue);
+            padding-bottom: 25px;
+            margin-bottom: 2cm;
+            position: relative; /* Para posicionar o logo */
+        }
+        .furb-logo {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 8cm;
+            height: auto;
+        }
+        .poster-header h2 { /* Título "Seminário" */
+            font-family: 'Merriweather', serif;
+            font-size: 48pt;
+            font-weight: 700;
+            color: var(--furb-blue);
+            margin: 0;
+        }
+        .poster-header h1 { /* Título do Trabalho */
+            font-family: 'Merriweather', serif;
+            font-size: 72pt;
+            font-weight: 900;
+            color: var(--furb-blue-dark);
+            margin: 15px 0;
+            line-height: 1.2;
+        }
+        .poster-header p { /* Autores e Afiliação */
+            font-size: 24pt;
+            font-weight: 500;
+            color: var(--text-dark);
+            line-height: 1.5;
+            margin: 10px 0;
+        }
+
+        /* --- CONTEÚDO (COLUNAS) --- */
+        .poster-content {
+            flex-grow: 1; /* Ocupa o espaço restante */
+            display: grid;
+            /* Coluna central é 1.5x mais larga */
+            grid-template-columns: 1fr 1.5fr 1fr;
+            gap: 2cm;
+        }
+        .poster-column {
+            display: flex;
+            flex-direction: column;
+            gap: 2cm;
+        }
+
+        .poster-section {
+            background: var(--bg-light-gray);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px 30px;
+            /* Garante que as seções não quebrem no meio ao imprimir */
+            break-inside: avoid;
+        }
+
+        .poster-section h3 { /* Títulos (INTRODUÇÃO, etc.) */
+            font-family: 'Merriweather', serif;
+            font-size: 36pt;
+            font-weight: 700;
+            color: var(--furb-blue);
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--border-color);
+            margin: 0 0 20px 0;
+            display: flex;
+            align-items: center;
+        }
+        .poster-section h3 i {
+            margin-right: 15px;
+            font-size: 32pt;
+        }
+        .poster-section h4 { /* Subtítulos (Pipeline de Dados, etc.) */
+            font-family: 'Merriweather', serif;
+            font-size: 24pt;
+            font-weight: 700;
+            color: var(--furb-blue-dark);
+            margin: 25px 0 15px 0;
+        }
+
+        .poster-section p,
+        .poster-section li {
+            font-size: 18pt;
+            line-height: 1.6;
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+        .poster-section ul,
+        .poster-section ol {
+            padding-left: 30px;
+        }
+        .poster-section strong {
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+
+        /* --- Elementos Customizados --- */
+        figure {
+            margin: 20px 0;
+            padding: 0;
+            text-align: center;
+        }
+        figure img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+        figcaption {
+            font-size: 14pt;
+            font-style: italic;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        /* Diagrama da Arquitetura */
+        .arch-diagram {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            font-family: 'DM Sans', sans-serif;
+        }
+        .arch-block {
+            background: #fff;
+            border: 2px solid var(--furb-blue);
+            border-radius: 8px;
+            padding: 15px 20px;
+            text-align: center;
+            width: 90%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .arch-block strong {
+            font-size: 18pt;
+            color: var(--furb-blue-dark);
+            display: block;
+        }
+        .arch-block span {
+            font-size: 14pt;
+            color: var(--text-light);
+        }
+        .arch-arrow {
+            font-size: 32pt;
+            color: var(--furb-blue);
+            font-weight: 700;
+        }
+
+        /* KPI Box (Acurácia) */
+        .kpi-box {
+            background: linear-gradient(135deg, var(--furb-blue), var(--furb-blue-dark));
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0, 80, 136, 0.3);
+        }
+        .kpi-box .kpi-title {
+            font-size: 24pt;
+            font-weight: 500;
+            opacity: 0.8;
+            margin: 0;
+        }
+        .kpi-box .kpi-value {
+            font-family: 'Merriweather', serif;
+            font-size: 80pt;
+            font-weight: 900;
+            margin: 10px 0;
+            line-height: 1;
+        }
+
+        /* Tabela (Relatório) */
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 16pt;
+        }
+        .results-table th, .results-table td {
+            border: 1px solid #ccc;
+            padding: 12px 15px;
+            text-align: center;
+        }
+        .results-table th {
+            background: var(--furb-blue-dark);
+            color: white;
+            font-family: 'Merriweather', serif;
+            font-size: 18pt;
+        }
+        .results-table td:first-child {
+            font-weight: 700;
+            background: var(--bg-light-gray);
+            color: var(--furb-blue-dark);
+        }
+
+        /* Matriz de Confusão (CSS Grid) */
+        .confusion-matrix {
+            display: grid;
+            grid-template-columns: 1fr 2fr 2fr;
+            grid-template-rows: 1fr 2fr 2fr;
+            width: 100%;
+            font-size: 16pt;
+            border: 2px solid var(--furb-blue-dark);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+        .cm-cell {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            line-height: 1.3;
+        }
+        .cm-header {
+            background: var(--furb-blue-dark);
+            color: white;
+            font-weight: 700;
+            font-size: 14pt;
+        }
+        .cm-label {
+            background: #e0e8f0;
+            color: var(--furb-blue-dark);
+            font-weight: 700;
+            font-size: 14pt;
+        }
+        .cm-cell.tn, .cm-cell.tp { background: #e6f7ff; }
+        .cm-cell.fp, .cm-cell.fn { background: #fff0f0; }
+        .cm-cell .value {
+            font-size: 36pt;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .cm-cell .label { font-size: 12pt; font-style: italic; }
+        .cm-cell.tn .value, .cm-cell.tp .value { color: #006d3a; }
+        .cm-cell.fp .value, .cm-cell.fn .value { color: #c91c1c; }
+
+        /* --- RODAPÉ --- */
+        .poster-footer {
+            flex: 0 0 auto; /* Não cresce, não encolhe */
+            background: var(--furb-blue);
+            color: var(--furb-cream);
+            padding: 25px 30px;
+            margin-top: 2cm;
+            border-radius: 8px;
+        }
+        .poster-footer h3 {
+            font-family: 'Merriweather', serif;
+            font-size: 32pt;
+            font-weight: 700;
+            color: white;
+            margin: 0 0 15px 0;
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+            padding-bottom: 10px;
+        }
+        .poster-footer p {
+            font-size: 14pt;
+            line-height: 1.5;
+            margin: 5px 0;
+            color: #e0e8f0;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="poster-container">
+
+        <!-- CABEÇALHO -->
+        <header class="poster-header">
+            <img src="http://googleusercontent.com/image_collection/image_retrieval/13830708987669356770" alt="Logo da FURB" class="furb-logo">
+            <h2>SEMINÁRIO - APRENDIZADO DE MÁQUINA</h2>
+            <h1>Classificação de Cães e Gatos com Visão Computacional</h1>
+            <p>
+                <strong>Acadêmicos:</strong> Daniel de Paula, Gustavo Guerreiro e Mayara Cardoso Simões<br>
+                Departamento de Sistemas e Computação, Universidade Regional de Blumenau (FURB) – Blumenau – SC – Brasil
+            </p>
+        </header>
+
+        <!-- CONTEÚDO (COLUNAS) -->
+        <main class="poster-content">
+
+            <!-- COLUNA 1: Introdução e Objetivos -->
+            <div class="poster-column">
+                <section class="poster-section">
+                    <h3><i class="fas fa-book-open"></i> INTRODUÇÃO</h3>
+                    <p>
+                        A classificação de imagens é uma tarefa fundamental em Visão Computacional. O dataset "Cats vs. Dogs" da Microsoft é um benchmark clássico para esta tarefa, conhecido por seu grande volume de dados (25.000 imagens) e por seus desafios, como a alta variabilidade de poses, iluminação e, notavelmente, a presença de arquivos de imagem corrompidos.
+                    </p>
+                    <p>
+                        Este trabalho investiga a formulação de um classificador binário de alta performance. O problema central não é apenas diferenciar "gato" de "cachorro", mas fazê-lo através de um pipeline robusto que lide com dados do mundo real, que são inerentemente imperfeitos.
+                    </p>
+                    <figure>
+                        <img src="http://googleusercontent.com/image_collection/image_retrieval/14819623074405127121" alt="Ícone de cérebro e chip de IA">
+                        <figcaption>Figura 1. Representação da IA em Visão Computacional.</figcaption>
+                    </figure>
+                </section>
+
+                <section class="poster-section">
+                    <h3><i class="fas fa-bullseye"></i> OBJETIVOS</h3>
+                    <p>O objetivo principal deste trabalho foi desenvolver e otimizar um modelo de Deep Learning para atingir a maior acurácia possível na classificação de cães e gatos.</p>
+                    <ol>
+                        <li>Implementar um pipeline de dados robusto capaz de filtrar arquivos corrompidos e preparar os dados para o treinamento.</li>
+                        <li>Aplicar a técnica de <strong>Transfer Learning</strong> utilizando a arquitetura <strong>MobileNetV2</strong>.</li>
+                        <li>Otimizar o modelo através de uma estratégia de <strong>Fine-Tuning</strong> em duas fases para maximizar a generalização.</li>
+                        <li>Validar o modelo em um conjunto de teste separado, visando uma acurácia superior a 98%.</li>
+                    </ol>
+                </section>
+            </div>
+
+            <!-- COLUNA 2: Metodologia -->
+            <div class="poster-column">
+                <section class="poster-section">
+                    <h3><i class="fas fa-cogs"></i> METODOLOGIA</h3>
+
+                    <h4>1. Pipeline de Dados e Pré-processamento</h4>
+                    <p>A robustez do modelo começa na preparação dos dados. Foi utilizado o <code>GeneratorBasedBuilder</code> do TensorFlow Datasets para gerenciar os caminhos dos arquivos.</p>
+                    <ul>
+                        <li><strong>Filtragem de Corrupção:</strong> Uma função usando <code>Pillow</code> (<code>Image.open().verify()</code>) foi executada para inspecionar cada arquivo. Apenas 24.914 imagens JPEG válidas foram mantidas.</li>
+                        <li><strong>Divisão:</strong> Os dados válidos foram separados logicamente em <strong>Treino (70%)</strong>, <strong>Validação (15%)</strong> e <strong>Teste (15%)</strong>.</li>
+                        <li><strong>Processamento:</strong> As imagens foram redimensionadas para <code>(224, 224, 3)</code> e normalizadas usando a função <code>preprocess_input</code> da MobileNetV2 (escala <code>[-1, 1]</code>).</li>
+                        <li><strong>Performance:</strong> O pipeline <code>tf.data</code> foi otimizado com <code>.batch(32)</code> e <code>.prefetch(tf.data.AUTOTUNE)</code>.</li>
+                    </ul>
+
+                    <h4>2. Arquitetura do Modelo</h4>
+                    <p>Utilizou-se Transfer Learning com um cabeçalho de classificação personalizado (top model) sobre o backbone MobileNetV2 (pré-treinado no ImageNet).</p>
+
+                    <figure class="arch-diagram">
+                        <div class="arch-block">
+                            <strong>Input</strong>
+                            <span>Imagem (224, 224, 3)</span>
+                        </div>
+                        <div class="arch-arrow">↓</div>
+                        <div class="arch-block">
+                            <strong>Data Augmentation</strong>
+                            <span>RandomFlip, RandomRotation, RandomZoom</span>
+                        </div>
+                        <div class="arch-arrow">↓</div>
+                        <div class="arch-block">
+                            <strong>Backbone: MobileNetV2</strong>
+                            <span>(Pesos 'imagenet', CONGELADO na Fase 1)</span>
+                        </div>
+                        <div class="arch-arrow">↓</div>
+                        <div class="arch-block">
+                            <strong>GlobalAveragePooling2D</strong>
+                        </div>
+                        <div class="arch-arrow">↓</div>
+                        <div class="arch-block">
+                            <strong>Dropout (0.2)</strong>
+                        </div>
+                        <div class="arch-arrow">↓</div>
+                        <div class="arch-block">
+                            <strong>Output: Dense (1, sigmoid)</strong>
+                            <span>Classificação Binária (0=Gato, 1=Cachorro)</span>
+                        </div>
+                        <figcaption>Figura 2. Arquitetura Sequencial do Modelo.</figcaption>
+                    </figure>
+
+                    <h4>3. Estratégia de Treinamento (2 Fases)</h4>
+                    <p>Para evitar "esquecimento catastrófico", o treino foi dividido em duas fases, ambas monitoradas por <code>EarlyStopping</code> (com <code>restore_best_weights=True</code>) para prevenir overfitting.</p>
+                    <ol>
+                        <li><strong>Fase 1 (Feature Extraction):</strong> O `backbone` permaneceu 100% congelado. Apenas o cabeçalho foi treinado por 18 épocas (<code>lr=1e-4</code>, <code>patience=3</code>) para "aquecer" os pesos.</li>
+                        <li><strong>Fase 2 (Fine-Tuning):</strong> As <strong>10 camadas finais</strong> do `backbone` foram descongeladas. O modelo foi recompilado com um <code>learning_rate</code> muito baixo (<code>1e-6</code>) e treinado por mais 5 épocas (<code>patience=5</code>) para especializar os pesos.</li>
+                    </ol>
+
+                </section>
+            </div>
+
+            <!-- COLUNA 3: Resultados e Conclusões -->
+            <div class="poster-column">
+                <section class="poster-section">
+                    <h3><i class="fas fa-chart-bar"></i> RESULTADOS</h3>
+                    <p>O modelo final foi avaliado no conjunto de teste (3.716 imagens), que não foi utilizado durante o treinamento ou validação.</p>
+
+                    <div class="kpi-box">
+                        <p class="kpi-title">Acurácia Geral (Teste)</p>
+                        <p class="kpi-value">98.52%</p>
+                    </div>
+
+                    <h4>Relatório de Classificação (Teste)</h4>
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th>Classe</th>
+                                <th>Precision</th>
+                                <th>Recall</th>
+                                <th>F1-Score</th>
+                                <th>Support</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>🐱 Gato (0)</td>
+                                <td>0.99</td>
+                                <td>0.98</td>
+                                <td>0.99</td>
+                                <td>1861</td>
+                            </tr>
+                            <tr>
+                                <td>🐶 Cachorro (1)</td>
+                                <td>0.98</td>
+                                <td>0.99</td>
+                                <td>0.99</td>
+                                <td>1855</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4>Matriz de Confusão (Teste)</h4>
+                    <div class="confusion-matrix">
+                        <div class="cm-cell"></div>
+                        <div class="cm-cell cm-header">Predito: Gato</div>
+                        <div class="cm-cell cm-header">Predito: Cachorro</div>
+
+                        <div class="cm-cell cm-label">Verdadeiro: Gato</div>
+                        <div class="cm-cell tn">
+                            <span class="value">1824</span>
+                            <span class="label">(Verd. Negativo)</span>
+                        </div>
+                        <div class="cm-cell fp">
+                            <span class="value">37</span>
+                            <span class="label">(Falso Positivo)</span>
+                        </div>
+
+                        <div class="cm-cell cm-label">Verdadeiro: Cachorro</div>
+                        <div class="cm-cell fn">
+                            <span class="value">19</span>
+                            <span class="label">(Falso Negativo)</span>
+                        </div>
+                        <div class="cm-cell tp">
+                            <span class="value">1836</span>
+                            <span class="label">(Verd. Positivo)</span>
+                        </div>
+                    </div>
+                    <figcaption>Figura 3. Matriz de Confusão no conjunto de teste.</figcaption>
+                </section>
+
+                <section class="poster-section">
+                    <h3><i class="fas fa-check-double"></i> CONCLUSÕES</h3>
+                    <p>
+                        O objetivo de superar 98% de acurácia foi alcançado, atingindo <strong>98.52%</strong>. A performance é extremamente alta e balanceada entre as classes, como visto pelo F1-Score de 0.99 para ambas.
+                    </p>
+                    <p>
+                        Os fatores críticos para o sucesso foram:
+                    </p>
+                    <ul>
+                        <li>A <strong>filtragem de dados corrompidos</strong> com <code>Pillow</code>, que garantiu a estabilidade do treino.</li>
+                        <li>O uso do <strong>pré-processamento correto</strong> (<code>preprocess_input</code>) da MobileNetV2.</li>
+                        <li>A estratégia de <strong>Fine-Tuning em 2 fases</strong>, que permitiu ao modelo especializar-se sem sofrer overfitting.</li>
+                    </ul>
+                </section>
+            </div>
+        </main>
+
+        <!-- RODAPÉ -->
+        <footer class="poster-footer">
+            <h3>REFERÊNCIAS</h3>
+            <p>[1] MICROSOFT. <strong>Cats vs. Dogs Dataset</strong>. Disponível em: https://www.kaggle.com/datasets/shaunthesheep/microsoft-catsvsdogs-dataset. Acesso em: 16 nov. 2025.</p>
+            <p>[2] SANDLER, M., et al. <strong>MobileNetV2: Inverted Residuals and Linear Bottlenecks</strong>. In: Conference on Computer Vision and Pattern Recognition (CVPR), 2018.</p>
+            <p>[3] CHOLLET, F., et al. <strong>Keras</strong>. GitHub, 2015. Disponível em: https://keras.io.</p>
+        </footer>
+    </div>
+
+</body>
+</html>
