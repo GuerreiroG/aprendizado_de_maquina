@@ -1,5 +1,5 @@
 import tensorflow as tf
-from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
+from tensorflow.keras.applications.mobilenet_v3 import preprocess_input
 from tensorflow.keras.preprocessing import image
 import numpy as np
 import glob
@@ -7,7 +7,7 @@ import os
 
 PASTA_NOVAS_IMAGENS = "TestesExtras"
 
-CAMINHO_MODELO = "cats_dogs_model_v2.keras"
+CAMINHO_MODELO = "cats_dogs_model_v3.keras"
 
 TAMANHO_IMAGEM = 224
 
@@ -46,14 +46,10 @@ def prever_novas_imagens():
 
     for caminho in caminhos_imagens:
         try:
-            # a. Carregar a imagem com o tamanho exato do modelo
             img = image.load_img(caminho, target_size=(TAMANHO_IMAGEM, TAMANHO_IMAGEM))
 
-            # b. Converter para um array NumPy
             img_array = image.img_to_array(img)
 
-            # c. Adicionar a dimensão do "batch" (lote)
-            # O modelo espera (N, 224, 224, 3), então mudamos de (224, 224, 3) para (1, 224, 224, 3)
             img_batch = np.expand_dims(img_array, axis=0)
 
             # d. Aplicar o pré-processamento EXATO da MobileNetV2
