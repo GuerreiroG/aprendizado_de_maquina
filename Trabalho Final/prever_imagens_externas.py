@@ -52,13 +52,10 @@ def prever_novas_imagens():
 
             img_batch = np.expand_dims(img_array, axis=0)
 
-            # d. Aplicar o pré-processamento EXATO da MobileNetV2
             img_preprocessed = preprocess_input(img_batch)
 
-            # e. Fazer a predição
             prediction = modelo.predict(img_preprocessed, verbose=0)
 
-            # f. Interpretar o resultado (saída sigmoid)
             probabilidade = prediction[0][0]
 
             if probabilidade > 0.5:
